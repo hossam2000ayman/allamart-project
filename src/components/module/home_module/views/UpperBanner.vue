@@ -27,7 +27,7 @@
 .banner {
   .parent {
     height: 390px;
-    background-image: url(../../../assets/images/banner-bg.jpg);
+    background-image: url(../../../../assets/images/banner-bg.jpg);
     background-size: cover;
     background-position: left top;
     .content {

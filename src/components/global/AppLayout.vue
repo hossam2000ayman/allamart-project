@@ -1,6 +1,7 @@
 <template>
   <div class="layout">
-    <v-layout>
+    <!-- make layout component relative position to any sub component which position is absolute -->
+    <v-layout class="position-relative">
       <CartDrawer />
       <AppNavbar />
       <v-main style="padding-top: 190px">
