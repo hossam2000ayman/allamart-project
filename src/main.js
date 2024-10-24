@@ -18,11 +18,13 @@ const pinia = createPinia();
 //Emitter config (Global Emit)
 //Emitter definition is resemble to group of events with unique name that can be emit and listen over the entire application and apply some anonymous functions
 import mitt from "mitt";
+import SvgPlugin from "./components/global/plugins/SvgPlugin";
 const emitter = mitt();
 
 createApp(App)
   .use(router)
   .use(vuetify)
   .use(pinia)
+  .use(SvgPlugin) //add plugin import globally on application level
   .provide("emitter", emitter) //provide emitter globally with key "emitter" and will be injected into child components or views
   .mount("#app");
