@@ -3,7 +3,7 @@
     <v-layout>
       <CartDrawer />
       <AppNavbar />
-      <v-main>
+      <v-main style="padding-top: 190px">
         <!-- dynamic data will be every content in landing by using "<slot>" -->
         <slot></slot>
       </v-main>
