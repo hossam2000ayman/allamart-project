@@ -4,6 +4,7 @@
     <v-layout class="position-relative">
       <CartDrawer />
       <AppNavbar />
+      <FixedNav />
       <v-main style="padding-top: 190px">
         <!-- dynamic data will be every content in landing by using "<slot>" -->
         <slot></slot>
@@ -17,12 +18,14 @@
 import AppFooter from "./AppFooter.vue";
 import AppNavbar from "./AppNavbar.vue";
 import CartDrawer from "./CartDrawer.vue";
+import FixedNav from "./FixedNav.vue";
 
 export default {
   components: {
     AppNavbar,
     AppFooter,
     CartDrawer,
+    FixedNav,
   },
 };
 </script>

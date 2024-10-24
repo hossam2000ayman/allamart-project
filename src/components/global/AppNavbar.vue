@@ -1,6 +1,6 @@
 <template>
   <div class="nav-bar">
-    <v-app-bar color="#161880" class="pt-3" height="fit-content">
+    <v-app-bar color="#161880" class="pt-3" height="fit-content" absolute>
       <v-container fluid>
         <v-row>
           <v-col cols="3">
@@ -41,7 +41,7 @@
                   <v-badge
                     location="right top"
                     :content="option.content"
-                    color="blue"
+                    color="red"
                     offset-x="-15"
                   ></v-badge>
                   <span

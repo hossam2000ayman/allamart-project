@@ -52,12 +52,11 @@ export default {
       <svg
                 data-icon="search"
                 viewBox="0 0 512 512"
-                width="50%"
                 height="50%"
                 style="
                   position: absolute;
-                  top: 10px;
-                  left: 70%;
+                  top: 14px;
+                  right: 5%;
                   transform: translateY(-50);
                 "
               >
