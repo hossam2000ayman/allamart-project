@@ -1,6 +1,6 @@
 <template>
-  <div class="top-offers bg-grey-lighten-4 pt-9">
-    <v-container fluid>
+  <div class="top-offers bg-grey-lighten-4 py-9">
+    <v-container fluid class="pt-5">
       <v-row>
         <v-col
           cols="4"
