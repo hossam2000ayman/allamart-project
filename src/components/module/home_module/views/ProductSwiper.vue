@@ -21,21 +21,23 @@
             {{ product.title }}
           </v-card-title>
           <v-hover v-slot="{ isHovering, props }">
-            <div class="image-parent" style="height: 200px; overflow: hidden">
-              <img
-                :src="
-                  shownItem[product.title]
-                    ? shownItem[product.title]
-                    : product.thumbnail
-                "
-                class="w-100"
-                style="height: 100%"
-                v-bind="props"
-                :style="`height: 200px; transition: 0.5s all ease-in-out; scale: ${
-                  isHovering ? 1.1 : 1
-                }; cursor: pointer`"
-              />
-            </div>
+            <v-lazy>
+              <div class="image-parent" style="height: 200px; overflow: hidden">
+                <img
+                  :src="
+                    shownItem[product.title]
+                      ? shownItem[product.title]
+                      : product.thumbnail
+                  "
+                  class="w-100"
+                  style="height: 100%"
+                  v-bind="props"
+                  :style="`height: 200px; transition: 0.5s all ease-in-out; scale: ${
+                    isHovering ? 1.1 : 1
+                  }; cursor: pointer`"
+                />
+              </div>
+            </v-lazy>
           </v-hover>
 
           <v-card-text class="pl-0 pb-1">

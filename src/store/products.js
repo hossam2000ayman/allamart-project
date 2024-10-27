@@ -9,7 +9,7 @@ export const ProductsModule = defineStore("ProductsModule", {
       await axios
         .get("https://dummyjson.com/products")
         .then((response) => {
-          this.flashDeals = response.data.products.slice(0, 8); //get first 8 product from this array
+          this.flashDeals = response.data.products.slice(0, 30); //get first 8 product from this array
           console.log("flashDeals :: ", this.flashDeals);
         })
         .catch((error) => console.log(error));
