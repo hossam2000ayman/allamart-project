@@ -1,0 +1,157 @@
+<template>
+  <div class="products-swiper py-16 px-5">
+    <div class="title mb-10 d-flex align-center justify-space-between">
+      <h2 style="font-weight: 900; font-size: 30px" class="text-error">
+        Flash Deals
+      </h2>
+      <a href="#" class="text-black" style="font-size: 14px">Shop All</a>
+    </div>
+    <swiper
+      :pagination="{ element: '.swiper-pagination', clickable: true }"
+      :navigation="{ prevIcon: '.swiper-previous', nextIcon: 'swiper-next' }"
+      :autoplay="{ delay: 3000 }"
+      :modules="modules"
+      :slides-per-view="4"
+      :space-between="35"
+      class="pb-5"
+    >
+      <swiper-slide v-for="product in products" :key="product.id">
+        <v-card elevation="0" class="pb-6">
+          <v-card-title class="pl-0 pb-1 text-sm-body-1 font-weight-bold">
+            {{ product.title }}
+          </v-card-title>
+          <v-hover v-slot="{ isHovering, props }">
+            <div class="image-parent" style="height: 200px; overflow: hidden">
+              <img
+                :src="
+                  shownItem[product.title]
+                    ? shownItem[product.title]
+                    : product.thumbnail
+                "
+                class="w-100"
+                style="height: 100%"
+                v-bind="props"
+                :style="`height: 200px; transition: 0.5s all ease-in-out; scale: ${
+                  isHovering ? 1.1 : 1
+                }; cursor: pointer`"
+              />
+            </div>
+          </v-hover>
+
+          <v-card-text class="pl-0 pb-1">
+            {{
+              product.description.split(" ").length < 8
+                ? product.description
+                : product.description.split(" ").slice(0, 10).join(" ") + "..."
+            }}
+          </v-card-text>
+          <v-rating
+            v-model="product.rating"
+            half-increments
+            readonly
+            color="yellow-darken-2"
+            size="x-small"
+            density="compact"
+          ></v-rating>
+          <v-card-text class="pl-0 pt-0">
+            <del> ${{ product.price }} </del>
+            From
+            <span class="text-red" style="font-weight: 900; font-size: 16px">
+              ${{
+                Math.ceil(
+                  product.price -
+                    product.price * (product.discountPercentage / 100)
+                )
+              }}
+            </span>
+          </v-card-text>
+          <v-btn-toggle v-model="shownItem[product.title]">
+            <v-btn
+              v-for="(picture, index) in product.images"
+              :value="picture"
+              :key="index"
+              size="x-small"
+              rounded="xl"
+              :ripple="false"
+            >
+              <img
+                :src="picture"
+                width="30"
+                height="30"
+                style="border-radius: 50%; border: 1px solid rgb(0, 0, 0, 0.3)"
+              />
+            </v-btn>
+          </v-btn-toggle>
+          <div class="mt-5">
+            <v-btn
+              density="compact"
+              class="px-12"
+              style="text-transform: none; border-radius: 30px"
+              variant="outlined"
+            >
+              Choose Options
+            </v-btn>
+          </div>
+        </v-card>
+      </swiper-slide>
+      <div class="swiper-previous"></div>
+      <div class="swiper-next"></div>
+      <div class="swiper-pagination"></div>
+    </swiper>
+  </div>
+</template>
+
+<script>
+import { Navigation, Pagination, Autoplay } from "swiper";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+export default {
+  props: {
+    products: {
+      type: Array,
+      required: true,
+    },
+  },
+  setup() {
+    return {
+      modules: [Pagination, Navigation, Autoplay],
+    };
+  },
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
+
+  data() {
+    return {
+      shownItem: {},
+    };
+  },
+};
+</script>
+
+<style lang="scss">
+.products-swiper {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 35px;
+    height: 35px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: white;
+    top: 40%;
+    &::after {
+      font-size: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: rgb(69, 68, 68);
+      font-weight: 900;
+    }
+  }
+
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+  }
+}
+</style>

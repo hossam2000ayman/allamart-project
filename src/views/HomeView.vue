@@ -8,7 +8,7 @@
 import TheFeatures from "@/components/module/home_module/views/TheFeatures.vue";
 import TopOffers from "@/components/module/home_module/views/TopOffers.vue";
 import UpperBanner from "@/components/module/home_module/views/UpperBanner.vue";
-import FlashDeals from "@/components/module/home_module/views/FlashDeals.vue";
+import FlashDeals from "@/components/module/home_module/views/ProductSwiper.vue";
 import { ProductsModule } from "@/store/products";
 import { mapActions, mapState } from "pinia";
 export default {

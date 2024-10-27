@@ -13,7 +13,9 @@
     "core-js": "^3.8.3",
     "mitt": "^3.0.1",
     "pinia": "^2.2.4",
+    "swiper": "^8.4.7",
     "vue": "^3.5.12",
+    "vue-awesome-swiper": "^5.0.1",
     "vue-router": "^4.0.3",
     "vue-template-compiler": "^2.7.16",
     "vuetify": "^3.7.3"

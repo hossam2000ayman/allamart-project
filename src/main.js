@@ -21,6 +21,13 @@ import mitt from "mitt";
 import SvgPlugin from "./components/global/plugins/SvgPlugin";
 const emitter = mitt();
 
+//Swiper config
+import "swiper/css";
+// pagination import css file
+import "swiper/css/pagination";
+// navigation import css file
+import "swiper/css/navigation";
+
 createApp(App)
   .use(router)
   .use(vuetify)
