@@ -5,6 +5,7 @@
   <FlashDeals :products="flashDeals" />
   <TopCategories />
   <NewProducts :products="newFoods" />
+  <QualityFeatures />
 </template>
 <script>
 import TheFeatures from "@/components/module/home_module/views/TheFeatures.vue";
@@ -13,6 +14,7 @@ import UpperBanner from "@/components/module/home_module/views/UpperBanner.vue";
 import FlashDeals from "@/components/module/home_module/views/ProductSwiper.vue";
 import TopCategories from "@/components/module/home_module/views/TopCategories.vue";
 import NewProducts from "@/components/module/home_module/views/NewProducts.vue";
+import QualityFeatures from "@/components/module/home_module/views/QualityFeatures.vue";
 import { ProductsModule } from "@/store/products";
 import { mapActions, mapState } from "pinia";
 export default {
@@ -23,6 +25,7 @@ export default {
     FlashDeals,
     TopCategories,
     NewProducts,
+    QualityFeatures,
   },
   computed: {
     ...mapState(ProductsModule, ["flashDeals", "newFoods"]),
