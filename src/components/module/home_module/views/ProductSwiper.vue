@@ -1,8 +1,8 @@
 <template>
   <div class="products-swiper py-16 px-5">
     <div class="title mb-10 d-flex align-center justify-space-between">
-      <h2 style="font-weight: 900; font-size: 30px" class="text-error">
-        Flash Deals
+      <h2 style="font-weight: 900; font-size: 30px" :class="[`text-${color}`]">
+        {{ title }}
       </h2>
       <a href="#" class="text-black" style="font-size: 14px">Shop All</a>
     </div>
@@ -111,6 +111,15 @@ export default {
     products: {
       type: Array,
       required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    color: {
+      type: String,
+      required: false,
+      default: "grey",
     },
   },
   setup() {
