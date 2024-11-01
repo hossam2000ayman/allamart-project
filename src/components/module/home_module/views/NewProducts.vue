@@ -6,11 +6,20 @@
     </div>
     <v-container fluid>
       <v-row>
-        <v-col cols="7" class="pt-16">
+        <v-col cols="7" class="pt-16" v-if="!products.length">
+          <v-row>
+            <v-col cols="3" v-for="num in 3" :key="num">
+              <v-skeleton-loader
+                type="image, article, button"
+              ></v-skeleton-loader>
+            </v-col>
+          </v-row>
+        </v-col>
+        <v-col cols="7" class="pt-16" v-else>
           <swiper
             :pagination="{ element: '.swiper-pagination', clickable: true }"
             :modules="modules"
-            :slides-per-view="4"
+            :slides-per-view="3"
             :space-between="20"
             class="pb-5"
           >
@@ -119,7 +128,7 @@
 <script>
 import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-
+import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
 export default {
   props: {
     products: {
@@ -135,6 +144,7 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
+    VSkeletonLoader,
   },
 
   data() {

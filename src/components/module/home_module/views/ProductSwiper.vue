@@ -6,6 +6,19 @@
       </h2>
       <a href="#" class="text-black" style="font-size: 14px">Shop All</a>
     </div>
+    <v-container fluid v-if="!products.length">
+      <v-row>
+        <v-col cols="12">
+          <v-row>
+            <v-col cols="3" v-for="num in 4" :key="num">
+              <v-skeleton-loader
+                type="image, article, button"
+              ></v-skeleton-loader>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
     <swiper
       :pagination="{ element: '.swiper-pagination', clickable: true }"
       :navigation="{ prevIcon: '.swiper-previous', nextIcon: 'swiper-next' }"
@@ -106,6 +119,7 @@
 <script>
 import { Navigation, Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
 export default {
   props: {
     products: {
@@ -130,6 +144,7 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
+    VSkeletonLoader,
   },
 
   data() {

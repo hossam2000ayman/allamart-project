@@ -23,6 +23,8 @@
     :products="newFragrances"
   />
   <img src="@/assets/images/tv-banner.webp" alt="" class="w-100" />
+
+  <WhyShopWithUs />
 </template>
 <script>
 import TheFeatures from "@/components/module/home_module/views/TheFeatures.vue";
@@ -34,6 +36,7 @@ import NewProducts from "@/components/module/home_module/views/NewProducts.vue";
 import QualityFeatures from "@/components/module/home_module/views/QualityFeatures.vue";
 import { ProductsModule } from "@/store/products";
 import { mapActions, mapState } from "pinia";
+import WhyShopWithUs from "@/components/module/home_module/views/WhyShopWithUs.vue";
 export default {
   components: {
     UpperBanner,
@@ -43,6 +46,7 @@ export default {
     TopCategories,
     NewProducts,
     QualityFeatures,
+    WhyShopWithUs,
   },
   computed: {
     ...mapState(ProductsModule, [
