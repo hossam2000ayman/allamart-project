@@ -14,16 +14,29 @@
               <v-card-text
                 class="pt-0 pb-3 px-0"
                 style="color: rgb(0, 0, 0, 0.7)"
-                v-for="(list, j) in footer.lists"
-                :key="j"
+                v-for="category in categories"
+                :key="category.title"
               >
-                {{ list.label }}
+                <router-link
+                  :to="{
+                    name: 'products-category',
+                    params: { category: category.route, title: category.title },
+                  }"
+                  style="color: rgb(127, 127, 127); text-decoration: none"
+                >
+                  {{ category.title }}
+                </router-link>
               </v-card-text>
             </v-card>
           </v-col>
           <v-col cols="3">
             <v-card elevation="0" color="transparent" class="pt-2">
-              <img src="@/assets/images/footer-logo.webp" alt="" />
+              <img
+                src="@/assets/images/footer-logo.webp"
+                @click="$router.replace({ name: 'home' })"
+                style="cursor: pointer"
+                alt=""
+              />
               <v-card-text
                 v-for="(contact, i) in contacts"
                 :key="i"
@@ -82,109 +95,24 @@
 </template>
 
 <script>
+import { ProductsModule } from "@/store/products";
+import { mapState } from "pinia";
 export default {
+  computed: {
+    ...mapState(ProductsModule, ["categories"]),
+  },
   data() {
     return {
       footers: [
         {
           title: "SHOP",
-          lists: [
-            {
-              label: "Electronics",
-              link: "#",
-            },
-            {
-              label: "Computers & Laptops",
-              link: "#",
-            },
-            {
-              label: "Smartphones & Tablets",
-              link: "#",
-            },
-            {
-              label: "Cameras",
-              link: "#",
-            },
-            {
-              label: "Video Games & Systems",
-              link: "#",
-            },
-            {
-              label: "Home Furniture",
-              link: "#",
-            },
-            {
-              label: "Weekly Special",
-              link: "#",
-            },
-          ],
         },
         {
           title: "FURTHER INFORMATION",
-          lists: [
-            {
-              label: "About",
-              link: "#",
-            },
-            {
-              label: "Customer Service",
-              link: "#",
-            },
-            {
-              label: "Reward Program",
-              link: "#",
-            },
-            {
-              label: "Shipping & Returns",
-              link: "#",
-            },
-            {
-              label: "Privacy Policy",
-              link: "#",
-            },
-            {
-              label: "Terms & Conditions",
-              link: "#",
-            },
-            {
-              label: "Blog",
-              link: "#",
-            },
-          ],
         },
 
         {
           title: "CUSTOMER SERVICE",
-          lists: [
-            {
-              label: "Search Terms",
-              link: "#",
-            },
-            {
-              label: "Advanced Search",
-              link: "#",
-            },
-            {
-              label: "Orders And Returns",
-              link: "#",
-            },
-            {
-              label: "Contact us",
-              link: "#",
-            },
-            {
-              label: "Theme FAQs",
-              link: "#",
-            },
-            {
-              label: "Consultant",
-              link: "#",
-            },
-            {
-              label: "Store Locations",
-              link: "#",
-            },
-          ],
         },
       ],
       contacts: [

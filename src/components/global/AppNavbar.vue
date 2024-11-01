@@ -4,7 +4,11 @@
       <v-container fluid>
         <v-row>
           <v-col cols="3">
-            <img src="@/assets/images/logo.png" />
+            <img
+              src="@/assets/images/logo.png"
+              @click="$router.replace({ name: 'home' })"
+              style="cursor: pointer"
+            />
           </v-col>
           <v-col cols="5">
             <div class="position-relative" style="width: 90%">
@@ -57,19 +61,27 @@
           </v-col>
         </v-row>
         <v-row class="mt-6">
-          <v-col cols="5">
+          <v-col cols="8">
             <ul
-              class="links d-flex text-white justify-space-between"
+              class="categories d-flex text-white justify-space-between"
               style="list-style: none"
             >
-              <div v-for="(link, index) in links" :key="index">
-                <li>{{ link }}</li>
-              </div>
+              <li v-for="category in categories" :key="category.title">
+                <router-link
+                  :to="{
+                    name: 'products-category',
+                    params: { category: category.route, title: category.title },
+                  }"
+                  style="color: white; text-decoration: none"
+                >
+                  {{ category.title }}
+                </router-link>
+              </li>
             </ul>
           </v-col>
-          <v-col cols="2"></v-col>
+          <!-- <v-col cols="2"></v-col> -->
 
-          <v-col cols="5" class="d-flex justify-end" style="gap: 35px">
+          <v-col cols="4" class="d-flex justify-end" style="gap: 35px">
             <div class="help d-flex align-center text-white" style="gap: 5px">
               <v-icon color="#0A6CDC" size="35">mdi-face-agent</v-icon>
               <span>Help</span>
@@ -113,6 +125,8 @@
 </template>
 
 <script>
+import { ProductsModule } from "@/store/products.js";
+import { mapState } from "pinia";
 export default {
   data() {
     return {
@@ -136,14 +150,6 @@ export default {
           content: "2",
         },
       ],
-      links: [
-        "Theme Demo",
-        "Shop",
-        "Product",
-        "New In",
-        "Must Have",
-        "Collections",
-      ],
       langs: [
         {
           icon: this.$svg.en_lang,
@@ -164,6 +170,9 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    ...mapState(ProductsModule, ["categories"]),
   },
   inject: ["emitter"], //inject by key of provide emitter
   methods: {

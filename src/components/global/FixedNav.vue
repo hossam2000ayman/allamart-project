@@ -4,20 +4,33 @@
       <v-container fluid>
         <v-row>
           <v-col cols="2">
-            <img src="@/assets/images/logo.png" class="w-50" />
+            <img
+              src="@/assets/images/logo.png"
+              @click="$router.replace({ name: 'home' })"
+              style="cursor: pointer"
+              class="w-50"
+            />
           </v-col>
-          <v-col cols="5">
+          <v-col cols="7">
             <ul
-              class="links d-flex text-white justify-space-between"
+              class="categories d-flex text-white justify-space-between"
               style="list-style: none"
             >
-              <div v-for="(link, index) in links" :key="index">
-                <li>{{ link }}</li>
-              </div>
+              <li v-for="category in categories" :key="category.title">
+                <router-link
+                  :to="{
+                    name: 'products-category',
+                    params: { category: category.route, title: category.title },
+                  }"
+                  style="color: white; text-decoration: none"
+                >
+                  {{ category.title }}
+                </router-link>
+              </li>
             </ul>
           </v-col>
           <v-col
-            cols="5"
+            cols="3"
             class="d-flex justify-end align-center"
             style="gap: 20px"
           >
@@ -59,6 +72,8 @@
 </template>
 
 <script>
+import { ProductsModule } from "@/store/products";
+import { mapState } from "pinia";
 export default {
   data() {
     return {
@@ -80,6 +95,10 @@ export default {
         },
       ],
     };
+  },
+
+  computed: {
+    ...mapState(ProductsModule, ["categories"]),
   },
 
   inject: ["emitter"], //inject by key of provide emitter
