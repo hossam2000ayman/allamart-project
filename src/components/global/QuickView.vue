@@ -157,6 +157,8 @@
                     class="w-75 text-white"
                     density="compact"
                     height="50"
+                    @click="addToCart(product)"
+                    :loading="btnLoading"
                   >
                     Add To Cart
                   </v-btn>
@@ -170,10 +172,27 @@
   </div>
 </template>
 <script>
+import { mapActions } from "pinia";
 import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
-
+import { CartsModule } from "@/store/carts.js";
 export default {
   inject: ["emitter"],
+  methods: {
+    ...mapActions(CartsModule, ["addItem"]),
+    addToCart(product) {
+      product.quantity = this.quantity;
+      this.btnLoading = true;
+      setTimeout(() => {
+        this.btnLoading = false;
+        this.addItem(product);
+        //open the cart drawer by emit this listener
+        this.emitter.emit("toggleCart");
+        this.emitter.emit("showSnackbarMessage", product.title);
+        //and close the dialog
+        this.dialog = false;
+      }, 1000);
+    },
+  },
   data() {
     return {
       loading: false,
@@ -181,6 +200,7 @@ export default {
       tab: "",
       dialog: false,
       product: "",
+      btnLoading: false,
     };
   },
 
@@ -204,17 +224,17 @@ export default {
 .v-tabs--density-default {
   --v-tabs-height: 100px;
 }
-.content-card {
+.v-card--variant-elevated {
   &::-webkit-scrollbar {
-    width: 20px;
+    width: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    width: 20px;
-    background-color: rgb(224, 224, 224);
+    width: 5px;
+    background-color: rgb(151, 150, 150);
   }
   &::-webkit-scrollbar-track {
-    width: 20px;
-    background-color: rgb(151, 150, 150);
+    width: 5px;
+    background-color: rgb(224, 224, 224);
   }
 }
 </style>

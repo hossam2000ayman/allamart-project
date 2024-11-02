@@ -3,17 +3,41 @@
     <!-- make the router view act as "<slot>" inside the app layout -->
     <router-view />
     <QuickView />
+    <v-snackbar
+      v-model="snakbar"
+      location="left bottom"
+      max-width="300"
+      timeout="3000"
+    >
+      {{ message }} has been added to your cart successfully !
+      <template v-slot:actions>
+        <v-icon @click="snakbar = false">mdi-close</v-icon>
+      </template>
+    </v-snackbar>
   </app-layout>
 </template>
 
 <script>
 import AppLayout from "./components/global/AppLayout.vue";
-import QuickView from "./components/module/home_module/views/QuickView.vue";
+import QuickView from "./components/global/QuickView.vue";
 
 export default {
+  inject: ["emitter"],
+  data() {
+    return {
+      snakbar: false,
+      message: "",
+    };
+  },
   components: {
     AppLayout,
     QuickView,
+  },
+  mounted() {
+    this.emitter.on("showSnackbarMessage", (data) => {
+      this.message = data;
+      this.snakbar = true;
+    });
   },
 };
 </script>

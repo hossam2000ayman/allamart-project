@@ -44,9 +44,10 @@
                 >
                   <v-badge
                     location="right top"
-                    :content="option.content"
+                    :content="option.name === 'Cart' ? cartItems.length : ''"
                     color="red"
                     offset-x="-15"
+                    v-if="option.name === 'Cart' ? cartItems.length : ''"
                   ></v-badge>
                   <span
                     style="width: 28px; fill: orange"
@@ -125,6 +126,7 @@
 </template>
 
 <script>
+import { CartsModule } from "@/store/carts";
 import { ProductsModule } from "@/store/products.js";
 import { mapState } from "pinia";
 export default {
@@ -135,19 +137,19 @@ export default {
           name: "Wish Lists",
           svg: this.$svg.heart,
           action: this.showWishLists,
-          content: "1",
+          // content: "1",
         },
         {
           name: "Sign In",
           svg: this.$svg.account,
           action: this.signIn,
-          content: "3",
+          // content: "3",
         },
         {
           name: "Cart",
           svg: this.$svg.cart,
           action: this.openCart,
-          content: "2",
+          // content: "2",
         },
       ],
       langs: [
@@ -173,6 +175,7 @@ export default {
   },
   computed: {
     ...mapState(ProductsModule, ["categories"]),
+    ...mapState(CartsModule, ["cartItems"]),
   },
   inject: ["emitter"], //inject by key of provide emitter
   methods: {

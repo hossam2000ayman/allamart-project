@@ -128,6 +128,8 @@
                 class="w-75 text-white"
                 density="compact"
                 height="50"
+                @click="addToCart(singleProduct)"
+                :loading="btnLoading"
               >
                 Add To Cart
               </v-btn>
@@ -139,16 +141,19 @@
   </div>
 </template>
 <script>
+import { CartsModule } from "@/store/carts";
 import { ProductsModule } from "@/store/products";
 import { mapActions, mapState } from "pinia";
 import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
 
 export default {
+  inject: ["emitter"],
   data() {
     return {
       loading: false,
       quantity: 1,
       tab: "",
+      btnLoading: false,
     };
   },
 
@@ -165,6 +170,19 @@ export default {
   },
   methods: {
     ...mapActions(ProductsModule, ["getSingleProductById"]),
+    ...mapActions(CartsModule, ["addItem"]),
+    addToCart(product) {
+      product.quantity = this.quantity;
+      this.addItem(product);
+      this.btnLoading = true;
+      setTimeout(() => {
+        this.btnLoading = false;
+        this.addItem(product);
+        //open the cart drawer by emit this listener
+        this.emitter.emit("toggleCart");
+        this.emitter.emit("showSnackbarMessage", product.title);
+      }, 1000);
+    },
   },
 };
 </script>

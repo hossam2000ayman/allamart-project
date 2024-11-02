@@ -27,11 +27,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 // navigation import css file
 import "swiper/css/navigation";
+import CartsPlugin from "./components/global/plugins/CartsPlugin";
 
 createApp(App)
   .use(router)
   .use(vuetify)
   .use(pinia)
   .use(SvgPlugin) //add plugin import globally on application level
+  .use(CartsPlugin) //add another plugin import globally on application level
   .provide("emitter", emitter) //provide emitter globally with key "emitter" and will be injected into child components or views
   .mount("#app");

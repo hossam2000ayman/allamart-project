@@ -53,9 +53,10 @@
                 >
                   <v-badge
                     location="right top"
-                    :content="option.content"
+                    :content="cartItems.length"
                     color="red"
                     offset-x="-15"
+                    v-if="cartItems.length"
                   ></v-badge>
                   <span
                     style="width: 28px; fill: white"
@@ -72,6 +73,7 @@
 </template>
 
 <script>
+import { CartsModule } from "@/store/carts";
 import { ProductsModule } from "@/store/products";
 import { mapState } from "pinia";
 export default {
@@ -99,6 +101,7 @@ export default {
 
   computed: {
     ...mapState(ProductsModule, ["categories"]),
+    ...mapState(CartsModule, ["cartItems"]),
   },
 
   inject: ["emitter"], //inject by key of provide emitter
@@ -106,7 +109,6 @@ export default {
   methods: {
     openCart() {
       this.emitter.emit("toggleCart"); //fire event and will be listen in next step
-      console.log("toggleCart emit");
     },
   },
 };

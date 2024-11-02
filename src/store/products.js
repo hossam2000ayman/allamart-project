@@ -1,6 +1,7 @@
 import axios from "axios";
 import { defineStore } from "pinia";
 export const ProductsModule = defineStore("ProductsModule", {
+  //in pinia state act as state + getters
   state: () => ({
     flashDeals: [],
     newFoods: [],
@@ -132,6 +133,7 @@ export const ProductsModule = defineStore("ProductsModule", {
       // },
     ],
   }),
+  //in pinia actions act as mutations + actions
   actions: {
     async getProducts() {
       await axios
