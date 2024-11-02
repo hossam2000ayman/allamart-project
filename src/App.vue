@@ -39,4 +39,11 @@ nav {
 .v-rating__wrapper {
   margin-right: 5px;
 }
+
+// to hide arrows of increment and decrement on input of type number
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 </style>

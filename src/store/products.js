@@ -8,6 +8,7 @@ export const ProductsModule = defineStore("ProductsModule", {
     newFurnitures: [],
     newFragrances: [],
     categoryProduct: [],
+    singleProduct: "",
     categories: [
       {
         route: "beauty",
@@ -157,13 +158,20 @@ export const ProductsModule = defineStore("ProductsModule", {
         })
         .catch((error) => console.log(error));
     },
-
     async getProductsByCategory(category) {
       await axios
         .get(`https://dummyjson.com/products/category/${category}`)
         .then((response) => {
-          console.log("response :: ", response.data);
+          console.log("getProductByCategory response :: ", response.data);
           this.categoryProduct = response.data;
+        });
+    },
+    async getSingleProductById(id) {
+      await axios
+        .get(`https://dummyjson.com/products/${id}`)
+        .then((response) => {
+          console.log("getSingleProduct response :: ", response.data);
+          this.singleProduct = response.data;
         });
     },
   },

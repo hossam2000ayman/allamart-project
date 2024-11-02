@@ -1,0 +1,226 @@
+<template>
+  <div class="single-product-details mt-16">
+    <v-container fluid>
+      <v-row>
+        <v-col cols="7">
+          <img
+            :src="tab ? tab : singleProduct.thumbnail"
+            class="w-100"
+            height="500"
+            alt=""
+            v-if="!loading"
+          />
+          <v-skeleton-loader v-if="loading" type="image, image, image">
+          </v-skeleton-loader>
+          <v-tabs center-active heigh="200" v-model="tab" class="mt-10">
+            <v-tab
+              v-for="(image, i) in singleProduct.images"
+              :key="i"
+              class="mx-10"
+              :value="image"
+            >
+              <img :src="image" alt="" width="100" height="200" />
+            </v-tab>
+          </v-tabs>
+        </v-col>
+        <v-col cols="5" class="pt-0 pl-0">
+          <v-skeleton-loader v-if="loading" type="article, article, article">
+          </v-skeleton-loader>
+          <v-card elevation="0" v-if="!loading">
+            <v-card-title
+              class="px-0"
+              style="font-size: 18px; font-weight: bold"
+            >
+              ({{ singleProduct.title }}) Sample -
+              {{ singleProduct.category }} For Sale
+            </v-card-title>
+            <div class="rating-parent d-flex align-center" style="gap: 10px">
+              <v-rating
+                v-model="singleProduct.rating"
+                half-increments
+                readonly
+                color="yellow-darken-2"
+                size="x-small"
+                density="compact"
+              >
+              </v-rating>
+              <span class="mt-1" style="font-size: 14px; color: rgb(96, 96, 96)"
+                >Stock {{ singleProduct.stock }}</span
+              >
+            </div>
+            <v-card-text
+              class="px-0"
+              style="font-size: 14px; color: rgb(96, 96, 96)"
+            >
+              {{ singleProduct.description }}
+            </v-card-text>
+            <v-card-text
+              class="px-0 pt-0"
+              style="font-size: 14px; color: rgb(96, 96, 96)"
+            >
+              Brand : {{ singleProduct.brand }}
+            </v-card-text>
+
+            <v-card-text
+              class="px-0 pt-0"
+              style="font-size: 14px; color: rgb(96, 96, 96)"
+            >
+              Avaliability :
+              {{ singleProduct.stock > 0 ? "In Stock" : "Out of Stock" }}
+              <v-card-text class="pl-0 pt-0">
+                <del> ${{ singleProduct.price }} </del>
+                From
+                <span style="font-weight: 900; font-size: 16px">
+                  ${{
+                    Math.ceil(
+                      singleProduct.price -
+                        singleProduct.price *
+                          (singleProduct.discountPercentage / 100)
+                    )
+                  }}
+                </span>
+              </v-card-text>
+            </v-card-text>
+            <v-card-text class="pl-0 pt-0"> Quantity </v-card-text>
+            <div
+              class="counter px-1"
+              style="
+                border-radius: 30px;
+                border: 1px solid rgb(201, 201, 201);
+                width: fit-content;
+              "
+            >
+              <v-icon size="22" @click="quantity === 1 ? false : quantity--">
+                mdi-minus
+              </v-icon>
+              <input
+                type="number"
+                style="
+                  border: none;
+                  outline: none;
+                  width: 60px;
+                  font-size: 13px;
+                "
+                class="text-center py-2"
+                min="1"
+                v-model="quantity"
+              />
+              <v-icon size="22" @click="quantity++">mdi-plus</v-icon>
+            </div>
+            <v-card-actions class="mt-7 w-100 px-0">
+              <v-btn
+                variant="outlined"
+                style="
+                  text-transform: none;
+                  border-radius: 30px;
+                  background-color: rgb(20, 20, 20);
+                "
+                class="w-75 text-white"
+                density="compact"
+                height="50"
+              >
+                Add To Cart
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
+</template>
+<script>
+import { ProductsModule } from "@/store/products";
+import { mapActions, mapState } from "pinia";
+import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
+
+export default {
+  data() {
+    return {
+      loading: false,
+      quantity: 1,
+      tab: "",
+      product: {
+        id: 6,
+        title: "Calvin Klein CK One",
+        description:
+          "CK One by Calvin Klein is a classic unisex fragrance, known for its fresh and clean scent. It's a versatile fragrance suitable for everyday wear.",
+        category: "fragrances",
+        price: 49.99,
+        discountPercentage: 0.32,
+        rating: 4.85,
+        stock: 17,
+        tags: ["fragrances", "perfumes"],
+        brand: "Calvin Klein",
+        sku: "DZM2JQZE",
+        weight: 5,
+        dimensions: {
+          width: 11.53,
+          height: 14.44,
+          depth: 6.81,
+        },
+        warrantyInformation: "5 year warranty",
+        shippingInformation: "Ships overnight",
+        availabilityStatus: "In Stock",
+        reviews: [
+          {
+            rating: 5,
+            comment: "Great value for money!",
+            date: "2024-05-23T08:56:21.619Z",
+            reviewerName: "Sophia Brown",
+            reviewerEmail: "sophia.brown@x.dummyjson.com",
+          },
+          {
+            rating: 3,
+            comment: "Very disappointed!",
+            date: "2024-05-23T08:56:21.619Z",
+            reviewerName: "Madison Collins",
+            reviewerEmail: "madison.collins@x.dummyjson.com",
+          },
+          {
+            rating: 1,
+            comment: "Poor quality!",
+            date: "2024-05-23T08:56:21.619Z",
+            reviewerName: "Maya Reed",
+            reviewerEmail: "maya.reed@x.dummyjson.com",
+          },
+        ],
+        returnPolicy: "No return policy",
+        minimumOrderQuantity: 20,
+        meta: {
+          createdAt: "2024-05-23T08:56:21.619Z",
+          updatedAt: "2024-05-23T08:56:21.619Z",
+          barcode: "2210136215089",
+          qrCode: "https://assets.dummyjson.com/public/qr-code.png",
+        },
+        images: [
+          "https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/1.png",
+          "https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/2.png",
+          "https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/3.png",
+        ],
+        thumbnail:
+          "https://cdn.dummyjson.com/products/images/fragrances/Calvin%20Klein%20CK%20One/thumbnail.png",
+      },
+    };
+  },
+
+  components: {
+    VSkeletonLoader,
+  },
+  async beforeMount() {
+    this.loading = true;
+    await this.getSingleProductById(this.$route.params.id);
+    this.loading = false;
+  },
+  computed: {
+    ...mapState(ProductsModule, ["singleProduct"]),
+  },
+  methods: {
+    ...mapActions(ProductsModule, ["getSingleProductById"]),
+  },
+};
+</script>
+<style scoped>
+.v-tabs--density-default {
+  --v-tabs-height: 200px;
+}
+</style>
