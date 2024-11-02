@@ -2,15 +2,18 @@
   <app-layout>
     <!-- make the router view act as "<slot>" inside the app layout -->
     <router-view />
+    <QuickView />
   </app-layout>
 </template>
 
 <script>
 import AppLayout from "./components/global/AppLayout.vue";
+import QuickView from "./components/module/home_module/views/QuickView.vue";
 
 export default {
   components: {
     AppLayout,
+    QuickView,
   },
 };
 </script>

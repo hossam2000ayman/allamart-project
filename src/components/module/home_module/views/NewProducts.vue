@@ -28,7 +28,7 @@
                 <v-hover v-slot="{ isHovering, props }">
                   <v-lazy>
                     <div
-                      class="image-parent"
+                      class="image-parent position-relative"
                       style="height: 150px; overflow: hidden"
                     >
                       <img
@@ -44,6 +44,25 @@
                           isHovering ? 1.1 : 1
                         }; cursor: pointer`"
                       />
+
+                      <v-btn
+                        width="60"
+                        height="30"
+                        variant="outlined"
+                        class="bg-white quick-view-btn"
+                        density="compact"
+                        :style="`border-radius: 30px; font-size: 12px; text-transform: none;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    opacity: ${isHovering ? 1 : 0};
+                    transition: 0.3s all ease-in;
+                    transition-delay: 0.5s`"
+                        @click="openQuickView(product)"
+                      >
+                        Quick View
+                      </v-btn>
                     </div>
                   </v-lazy>
                 </v-hover>
@@ -136,6 +155,12 @@ import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
 export default {
+  inject: ["emitter"],
+  methods: {
+    openQuickView(product) {
+      this.emitter.emit("openQuickView", product);
+    },
+  },
   props: {
     products: {
       type: Array,

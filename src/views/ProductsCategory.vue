@@ -20,26 +20,42 @@
             <v-lazy>
               <v-card elevation="0" class="pb-5">
                 <v-hover v-slot="{ isHovering, props }">
-                  <v-lazy>
-                    <div
-                      class="image-parent"
-                      style="height: 150px; overflow: hidden"
+                  <div
+                    class="image-parent position-relative"
+                    style="height: 150px; overflow: hidden"
+                  >
+                    <img
+                      :src="
+                        shownItem[product.title]
+                          ? shownItem[product.title]
+                          : product.thumbnail
+                      "
+                      class="w-100"
+                      style="height: 100%"
+                      v-bind="props"
+                      :style="`height: 200px; transition: 0.5s all ease-in-out; scale: ${
+                        isHovering ? 1.1 : 1
+                      }; cursor: pointer`"
+                    />
+                    <v-btn
+                      width="90"
+                      height="30"
+                      variant="outlined"
+                      class="bg-white quick-view-btn"
+                      density="compact"
+                      :style="`border-radius: 30px; font-size: 12px; text-transform: none;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    opacity: ${isHovering ? 1 : 0};
+                    transition: 0.3s all ease-in;
+                    transition-delay: 0.5s`"
+                      @click="openQuickView(product)"
                     >
-                      <img
-                        :src="
-                          shownItem[product.title]
-                            ? shownItem[product.title]
-                            : product.thumbnail
-                        "
-                        class="w-100"
-                        style="height: 100%"
-                        v-bind="props"
-                        :style="`height: 200px; transition: 0.5s all ease-in-out; scale: ${
-                          isHovering ? 1.1 : 1
-                        }; cursor: pointer`"
-                      />
-                    </div>
-                  </v-lazy>
+                      Quick View
+                    </v-btn>
+                  </div>
                 </v-hover>
 
                 <v-card-text class="pl-0 pb-1">
@@ -127,6 +143,7 @@ import { mapActions, mapState } from "pinia";
 import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
 
 export default {
+  inject: ["emitter"],
   data() {
     return {
       loading: false,
@@ -139,6 +156,9 @@ export default {
   },
   methods: {
     ...mapActions(ProductsModule, ["getProductsByCategory"]),
+    openQuickView(product) {
+      this.emitter.emit("openQuickView", product);
+    },
   },
   components: {
     VSkeletonLoader,

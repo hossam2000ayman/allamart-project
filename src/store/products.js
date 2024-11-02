@@ -150,11 +150,6 @@ export const ProductsModule = defineStore("ProductsModule", {
           this.newFragrances = response.data.products
             .slice(0, 30)
             .filter((frangrance) => frangrance.category === "fragrances");
-          console.log("flashDeals :: ", this.flashDeals);
-          console.log("newFoods :: ", this.newFoods);
-          console.log("newBeauties :: ", this.newBeauties);
-          console.log("newFurnitures :: ", this.newFurnitures);
-          console.log("newFragrances :: ", this.newFragrances);
         })
         .catch((error) => console.log(error));
     },
@@ -162,7 +157,6 @@ export const ProductsModule = defineStore("ProductsModule", {
       await axios
         .get(`https://dummyjson.com/products/category/${category}`)
         .then((response) => {
-          console.log("getProductByCategory response :: ", response.data);
           this.categoryProduct = response.data;
         });
     },
@@ -170,7 +164,6 @@ export const ProductsModule = defineStore("ProductsModule", {
       await axios
         .get(`https://dummyjson.com/products/${id}`)
         .then((response) => {
-          console.log("getSingleProduct response :: ", response.data);
           this.singleProduct = response.data;
         });
     },
