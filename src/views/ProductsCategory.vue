@@ -2,7 +2,7 @@
   <div class="products-category mt-10">
     <h1 class="text-center">{{ $route.params.title }}</h1>
     <v-container>
-      <v-card :loading="loading" class="pt-5" min-height="700" elevation="0">
+      <v-card class="pt-5" min-height="700" elevation="0">
         <v-row v-if="loading">
           <v-col cols="3" v-for="num in 4" :key="num">
             <v-skeleton-loader

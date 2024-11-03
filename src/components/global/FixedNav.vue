@@ -48,7 +48,9 @@
               >
                 <div
                   class="d-flex flex-column align-center"
-                  style="cursor: pointer"
+                  :style="`cursor: pointer; pointer-events: ${
+                    $route.name == 'cart-page' ? 'none' : 'unset'
+                  }`"
                   @click="option.action"
                 >
                   <v-badge
@@ -79,14 +81,6 @@ import { mapState } from "pinia";
 export default {
   data() {
     return {
-      links: [
-        "Theme Demo",
-        "Shop",
-        "Product",
-        "New In",
-        "Must Have",
-        "Collections",
-      ],
       //TODO will leave the values to find a way to make mixin or reusable list on application level on call (like mixin)
       options: [
         {

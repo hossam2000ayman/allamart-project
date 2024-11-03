@@ -41,7 +41,14 @@
             class="icon-shipping-truck"
             viewBox="0 0 40.55 24"
             width="30"
-            fill="#F44336"
+            :fill="
+              parseInt((calculateTotalPrice / 10000) * 100) < 50
+                ? '#F44336'
+                : parseInt((calculateTotalPrice / 10000) * 100) > 50 &&
+                  parseInt((calculateTotalPrice / 10000) * 100) < 100
+                ? '#FF9800'
+                : '#4CAF50'
+            "
             :style="`
               position: absolute;
               bottom: 50%;
@@ -78,7 +85,14 @@
             </g>
           </svg>
           <v-progress-linear
-            color="red"
+            :color="
+              parseInt((calculateTotalPrice / 10000) * 100) < 50
+                ? 'red'
+                : parseInt((calculateTotalPrice / 10000) * 100) > 50 &&
+                  parseInt((calculateTotalPrice / 10000) * 100) < 100
+                ? 'orange'
+                : 'green'
+            "
             height="10"
             :model-value="
               parseInt((calculateTotalPrice / 10000) * 100) <= 100
@@ -230,6 +244,7 @@
             density="compact"
             height="45"
             class="w-100"
+            @click="$router.replace({ name: 'cart-page' })"
           >
             View Cart
           </v-btn>

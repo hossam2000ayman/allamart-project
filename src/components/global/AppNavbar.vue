@@ -39,7 +39,9 @@
               >
                 <div
                   class="d-flex flex-column align-center"
-                  style="cursor: pointer"
+                  :style="`cursor: pointer; pointer-events: ${
+                    $route.name == 'cart-page' ? 'none' : 'unset'
+                  }`"
                   @click="option.action"
                 >
                   <v-badge
