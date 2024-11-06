@@ -185,7 +185,11 @@
                   <v-icon
                     size="19"
                     color="#a6a6a6"
-                    @click="product.quantity === 1 ? false : product.quantity--"
+                    @click="
+                      product.quantity === 1
+                        ? false
+                        : changeQuantity(product, '-')
+                    "
                   >
                     mdi-minus
                   </v-icon>
@@ -202,7 +206,11 @@
                     min="1"
                     v-model="product.quantity"
                   />
-                  <v-icon size="19" color="#a6a6a6" @click="product.quantity++">
+                  <v-icon
+                    size="19"
+                    color="#a6a6a6"
+                    @click="changeQuantity(product, '+')"
+                  >
                     mdi-plus
                   </v-icon>
                 </div>
@@ -231,6 +239,7 @@
             height="45"
             color="blue"
             class="w-100"
+            @click="toCheckout"
           >
             Checkout
           </v-btn>
@@ -260,7 +269,7 @@ export default {
   inject: ["emitter"], //inject by key of provide emitter
   data() {
     return {
-      drawer: true,
+      drawer: false,
     };
   },
   computed: {
@@ -277,14 +286,24 @@ export default {
     },
   },
   methods: {
-    ...mapActions(CartsModule, ["getCartItems", "deleteItem"]),
+    ...mapActions(CartsModule, [
+      "changeQuantity",
+      "getCartItems",
+      "deleteItem",
+      "setToLocalStorage",
+    ]),
+
+    toCheckout() {
+      this.setToLocalStorage();
+      this.$router.push({ name: "checkout" });
+    },
   },
   mounted() {
     //listen on global event called "toggleCart" and apply anonymous function
     this.emitter.on("toggleCart", () => {
       this.drawer = true;
     });
-    // this.getCartItems();
+    this.getCartItems();
   },
 };
 </script>

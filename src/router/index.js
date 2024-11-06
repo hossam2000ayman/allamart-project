@@ -20,9 +20,14 @@ const routes = [
   },
 
   {
-    path: "/cart/",
+    path: "/cart",
     name: "cart-page",
     component: () => import("@/views/CartPage.vue"),
+  },
+  {
+    path: "/checkout",
+    name: "checkout",
+    component: () => import("@/views/CheckoutPage.vue"),
   },
 ];
 

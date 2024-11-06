@@ -21,28 +21,43 @@ export const CartsModule = defineStore("CartsModule", {
         // you have to serialize (object to string) and then deserialize (string to object) (to make variable have no reference)
         this.cartItems.push(JSON.parse(JSON.stringify(item)));
       }
-      //   localStorage.setItem("cart-items", JSON.stringify(this.cartItems));
       this.$cartItems = this.cartItems;
-      console.log("Global cartItems :: ", this.$cartItems);
-      //   console.log("Local cartItems :: ", this.cartItems);
+      localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
+    },
+
+    changeQuantity(item, operand) {
+      for (let i = 0; i < this.cartItems.length; i++) {
+        if (this.cartItems[i].id == item.id) {
+          if (operand === "+") this.cartItems[i].quantity++;
+          else if (operand === "-") this.cartItems[i].quantity--;
+
+          break;
+        }
+      }
+      this.$cartItems = this.cartItems;
+      localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
     },
 
     getCartItems() {
-      if (this.$cartItems.length > 0) {
-        this.cartItems = JSON.parse(JSON.stringify(this.$cartItems));
+      if (localStorage.getItem("cartItems")) {
+        this.cartItems = JSON.parse(localStorage.getItem("cartItems"));
+        console.log("Cart Items :: ", this.cartItems);
       }
-      console.log("Cart Items :: ", this.cartItems);
     },
 
     deleteItem(id) {
       for (let i = 0; i < this.cartItems.length; i++) {
         if (this.cartItems[i].id === id) {
           this.cartItems.splice(i, 1);
+          localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
           this.$cartItems = this.cartItems;
           break;
         }
       }
-      console.log("Global Cart Items after delete is :: ", this.$cartItems);
+    },
+    setToLocalStorage() {
+      localStorage.setItem("cartItems", JSON.stringify(this.cartItems));
+      this.$cartItems = this.cartItems;
     },
   },
 });

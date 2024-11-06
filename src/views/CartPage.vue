@@ -211,7 +211,9 @@
                       size="19"
                       color="#a6a6a6"
                       @click="
-                        product.quantity === 1 ? false : product.quantity--
+                        product.quantity === 1
+                          ? false
+                          : changeQuantity(product, '-')
                       "
                     >
                       mdi-minus
@@ -232,7 +234,7 @@
                     <v-icon
                       size="19"
                       color="#a6a6a6"
-                      @click="product.quantity++"
+                      @click="changeQuantity(product, '+')"
                     >
                       mdi-plus
                     </v-icon>
@@ -379,6 +381,7 @@
                 height="45"
                 color="#3673e2"
                 class="w-100 mx-0"
+                @click="toCheckout"
               >
                 Proceed To Checkout
               </v-btn>
@@ -426,7 +429,16 @@ export default {
     },
   },
   methods: {
-    ...mapActions(CartsModule, ["getCartItems", "deleteItem"]),
+    ...mapActions(CartsModule, [
+      "changeQuantity",
+      "getCartItems",
+      "deleteItem",
+      "setToLocalStorage",
+    ]),
+    toCheckout() {
+      this.setToLocalStorage();
+      this.$router.push({ name: "checkout" });
+    },
   },
 };
 </script>
