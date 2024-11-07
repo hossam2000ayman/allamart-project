@@ -73,7 +73,7 @@
                 <router-link
                   :to="{
                     name: 'products-category',
-                    params: { category: category.route, title: category.title },
+                    query: { category: category.route, title: category.title },
                   }"
                   style="color: white; text-decoration: none"
                 >
@@ -89,7 +89,6 @@
               <v-icon color="#0A6CDC" size="35">mdi-face-agent</v-icon>
               <span>Help</span>
             </div>
-
             <div
               class="lang d-flex align-center text-white"
               style="gap: 10px; cursor: pointer"
@@ -102,7 +101,7 @@
               >
               <v-icon>mdi-chevron-down</v-icon>
               <v-menu activator="#language-btn">
-                <v-list v-model:selected="selectedLang">
+                <v-list v-model:selected="selectedLang" mandatory>
                   <v-list-item
                     v-for="(lang, index) in langs"
                     :key="index"
@@ -173,11 +172,56 @@ export default {
           currency: "USD",
         },
       ],
+      categoryList: [
+        { title: "Devices", data: [] },
+        { title: "Men Clothes", data: [] },
+        { title: "Women Clothes", data: [] },
+        // { title: "Sports", data: [] },
+        // { title: "Vehicles", data: [] },
+      ],
+      selectedCategory: "",
+      categoryMenuOpen: [false, false, false], // Initialize menu open states
     };
+  },
+  mounted() {
+    this.categoryList[0].data = this.getDevicesCategory;
+    this.categoryList[1].data = this.getMenClothesCategory;
+    this.categoryList[2].data = this.getWomenClothesCategory;
+    // this.categoryList[3].data = this.getMenClothesCategory;
+    // this.categoryList[4].data = this.getMenClothesCategory;
   },
   computed: {
     ...mapState(ProductsModule, ["categories"]),
     ...mapState(CartsModule, ["cartItems"]),
+    getDevicesCategory() {
+      return this.categories.filter(
+        (category) =>
+          category.route === "laptops" ||
+          category.route === "smartphones" ||
+          category.route === "tablets"
+      );
+    },
+    getMenClothesCategory() {
+      return this.categories.filter(
+        (category) =>
+          category.route === "mens-shirts" ||
+          category.route === "mens-shoes" ||
+          category.route === "mens-watches"
+      );
+    },
+    getWomenClothesCategory() {
+      return this.categories.filter(
+        (category) =>
+          category.route === "womens-bags" ||
+          category.route === "womens-watches" ||
+          category.route === "womens-jewellery" ||
+          category.route === "womens-dresses" ||
+          category.route === "womens-dresses" ||
+          category.route === "womens-shoes" ||
+          category.route === "tops" ||
+          category.route === "beauty"
+      );
+    },
   },
   inject: ["emitter"], //inject by key of provide emitter
   methods: {
@@ -190,6 +234,9 @@ export default {
     },
     signIn() {
       console.log("signIn invoked");
+    },
+    toggleCategoryMenu(index) {
+      this.categoryMenuOpen = this.categoryMenuOpen.map((_, i) => i === index);
     },
   },
 };

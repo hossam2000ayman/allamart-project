@@ -19,10 +19,15 @@
   </v-container>
   <ProductsComponent
     title="Top Frangrances"
-    color="purple"
+    color="blue"
     :products="newFragrances"
   />
   <img src="@/assets/images/tv-banner.webp" alt="" class="w-100" />
+  <ProductsComponent
+    title="Top Frangrances"
+    color="purple"
+    :products="newFragrances"
+  />
 
   <WhyShopWithUs />
 </template>
@@ -38,6 +43,14 @@ import { ProductsModule } from "@/store/products";
 import { mapActions, mapState } from "pinia";
 import WhyShopWithUs from "@/components/module/home_module/views/WhyShopWithUs.vue";
 export default {
+  data() {
+    return {
+      newLaptops: [],
+      newSmartphones: [],
+      newTablets: [],
+      newMotorcycles: [],
+    };
+  },
   components: {
     UpperBanner,
     TheFeatures,
@@ -58,10 +71,14 @@ export default {
     ]),
   },
   methods: {
-    ...mapActions(ProductsModule, ["getProducts"]),
+    ...mapActions(ProductsModule, ["getProducts", "getProductsByCategory"]),
   },
   async mounted() {
     await this.getProducts();
+    this.newLaptops = await this.getProductsByCategory("laptops");
+    this.newTablets = await this.getProductsByCategory("tablets");
+    this.newSmartphones = await this.getProductsByCategory("smartphones");
+    this.newMotorcycles = await this.getProductsByCategory("motorcycle");
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="products-category mt-10">
-    <h1 class="text-center">{{ $route.params.title }}</h1>
+    <h1 class="text-center">{{ $route.query.title }}</h1>
     <v-container>
       <v-card class="pt-5" min-height="700" elevation="0">
         <v-row v-if="loading">
@@ -92,9 +92,9 @@
                     }}
                   </span>
                 </v-card-text>
-                <v-btn-toggle v-model="shownItem[product.title]">
+                <v-btn-toggle v-model="shownItem[product.title]" mandatory>
                   <v-btn
-                    v-for="(picture, index) in product.images"
+                    v-for="(picture, index) in product.images.slice(0, 4)"
                     :value="picture"
                     :key="index"
                     size="x-small"
@@ -166,17 +166,22 @@ export default {
 
   watch: {
     async $route() {
-      document.documentElement.scrollTo(0, 0);
-      this.loading = true;
-      await this.getProductsByCategory(this.$route.params.category);
-      this.loading = false;
+      if (this.$route.name === "products-category") {
+        document.documentElement.scrollTo(0, 0);
+        this.loading = true;
+        await this.getProductsByCategory(this.$route.query.category);
+        this.loading = false;
+        console.log("fired");
+      }
     },
   },
 
   async mounted() {
+    if (!this.$route.query.category) {
+      return this.$router.go(-1);
+    }
     this.loading = true;
-    console.log("route :: ", this.$route);
-    await this.getProductsByCategory(this.$route.params.category);
+    await this.getProductsByCategory(this.$route.query.category);
     this.loading = false;
   },
 };

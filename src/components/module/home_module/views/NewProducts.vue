@@ -2,7 +2,7 @@
   <div class="new-products pt-12">
     <div class="title mb-10 px-5 d-flex align-center justify-space-between">
       <h2 style="font-weight: 900; font-size: 30px">New Foods</h2>
-      <a href="#" class="text-black" style="font-size: 14px">Shop All</a>
+      <!-- <a href="#" class="text-black" style="font-size: 14px">Shop All</a> -->
     </div>
     <v-container fluid>
       <v-row>
@@ -101,9 +101,9 @@
                     }}
                   </span>
                 </v-card-text>
-                <v-btn-toggle v-model="shownItem[product.title]">
+                <v-btn-toggle v-model="shownItem[product.title]" mandatory>
                   <v-btn
-                    v-for="(picture, index) in product.images"
+                    v-for="(picture, index) in product.images.slice(0, 4)"
                     :value="picture"
                     :key="index"
                     size="x-small"

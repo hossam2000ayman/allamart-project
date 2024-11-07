@@ -11,22 +11,39 @@
               >
                 {{ footer.title }}
               </v-card-title>
-              <v-card-text
-                class="pt-0 pb-3 px-0"
-                style="color: rgb(0, 0, 0, 0.7)"
-                v-for="category in categories"
-                :key="category.title"
-              >
-                <router-link
-                  :to="{
-                    name: 'products-category',
-                    params: { category: category.route, title: category.title },
-                  }"
-                  style="color: rgb(127, 127, 127); text-decoration: none"
+              <div v-if="footer.title === 'SHOP'">
+                <v-card-text
+                  class="pt-0 pb-3 px-0"
+                  style="color: rgb(0, 0, 0, 0.7)"
+                  v-for="category in categories"
+                  :key="category.title"
                 >
-                  {{ category.title }}
-                </router-link>
-              </v-card-text>
+                  <router-link
+                    :to="{
+                      name: 'products-category',
+                      query: {
+                        category: category.route,
+                        title: category.title,
+                      },
+                    }"
+                    style="color: rgb(127, 127, 127); text-decoration: none"
+                  >
+                    {{ category.title }}
+                  </router-link>
+                </v-card-text>
+              </div>
+              <div v-else>
+                <v-card-text
+                  class="pt-0 pb-3 px-0"
+                  style="color: rgb(0, 0, 0, 0.7)"
+                  v-for="list in footer.lists"
+                  :key="list"
+                >
+                  <span style="color: rgb(127, 127, 127)">
+                    {{ list }}
+                  </span>
+                </v-card-text>
+              </div>
             </v-card>
           </v-col>
           <v-col cols="3">
@@ -109,10 +126,26 @@ export default {
         },
         {
           title: "FURTHER INFORMATION",
+          lists: [
+            "About Us",
+            "Privacy Policy",
+            "Terms & Conditions",
+            "Returns & Refunds",
+            "Shipping & Delivery",
+            "Gift Cards",
+          ],
         },
 
         {
           title: "CUSTOMER SERVICE",
+          lists: [
+            "Contact Us",
+            "FAQs",
+            "Order Tracking",
+            "Size Guide",
+            "Payment Options",
+            "Warranty Information",
+          ],
         },
       ],
       contacts: [

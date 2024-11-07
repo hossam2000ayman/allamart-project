@@ -4,7 +4,7 @@
       <h2 style="font-weight: 900; font-size: 30px" :class="[`text-${color}`]">
         {{ title }}
       </h2>
-      <a href="#" class="text-black" style="font-size: 14px">Shop All</a>
+      <!-- <a href="#" class="text-black" style="font-size: 14px">Shop All</a> -->
     </div>
     <v-container fluid v-if="!products.length">
       <v-row>
@@ -22,7 +22,12 @@
     <swiper
       :pagination="{ element: '.swiper-pagination', clickable: true }"
       :navigation="{ prevIcon: '.swiper-previous', nextIcon: 'swiper-next' }"
-      :autoplay="{ delay: 3000 }"
+      :autoplay="{
+        delay: 3000,
+        pauseOnMouseEnter: true,
+        disableOnInteraction: false,
+      }"
+      :loop="true"
       :modules="modules"
       :slides-per-view="4"
       :space-between="35"
@@ -101,9 +106,9 @@
               }}
             </span>
           </v-card-text>
-          <v-btn-toggle v-model="shownItem[product.title]">
+          <v-btn-toggle v-model="shownItem[product.title]" mandatory>
             <v-btn
-              v-for="(picture, index) in product.images"
+              v-for="(picture, index) in product.images.slice(0, 4)"
               :value="picture"
               :key="index"
               size="x-small"

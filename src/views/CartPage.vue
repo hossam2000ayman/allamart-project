@@ -359,7 +359,7 @@
                 color="#3673e2"
                 class="w-100 text-white"
               >
-                Checkout
+                Calculate Shipping
               </v-btn>
             </v-card-actions>
             <v-divider width="100%" color="black"></v-divider>
