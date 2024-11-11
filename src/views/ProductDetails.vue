@@ -2,7 +2,7 @@
   <div class="single-product-details mt-16">
     <v-container fluid>
       <v-row>
-        <v-col cols="7">
+        <v-col cols="12" md="7">
           <img
             :src="tab ? tab : singleProduct.thumbnail"
             class="w-100"
@@ -23,7 +23,7 @@
             </v-tab>
           </v-tabs>
         </v-col>
-        <v-col cols="5" class="pt-0 pl-0">
+        <v-col cols="12" md="5" class="pt-0 pl-0 mt-8 mt-md-0">
           <v-skeleton-loader v-if="loading" type="article, article, article">
           </v-skeleton-loader>
           <v-card elevation="0" v-if="!loading">

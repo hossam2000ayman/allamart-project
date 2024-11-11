@@ -2,13 +2,20 @@
   <div class="features">
     <v-container>
       <v-row>
-        <v-col v-for="(feature, index) in features" :key="index">
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+          lg="4"
+          v-for="(feature, index) in features"
+          :key="index"
+        >
           <!-- Add class conditionally -->
           <div
-            class="parent d-flex align-center justify-center"
+            class="parent d-flex align-center justify-center flex-column flex-sm-row"
             :class="{ second: index > 0 }"
           >
-            <span v-html="feature.icon"></span>
+            <span v-html="feature.icon" class="mb-5 mb-sm-0"></span>
             <span>{{ feature.name }}</span>
           </div>
         </v-col>
@@ -53,6 +60,18 @@ export default {
       transform: translateY(-50%);
       width: 1px;
       height: 70%;
+    }
+  }
+}
+
+//Media Queries
+@media (max-width: 600px) {
+  .features {
+    .second {
+      &::before,
+      &::after {
+        display: none;
+      }
     }
   }
 }

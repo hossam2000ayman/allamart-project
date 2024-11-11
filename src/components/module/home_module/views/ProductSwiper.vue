@@ -27,6 +27,7 @@
         pauseOnMouseEnter: true,
         disableOnInteraction: false,
       }"
+      :breakpoints="breakpoints"
       :loop="true"
       :modules="modules"
       :slides-per-view="4"
@@ -188,6 +189,20 @@ export default {
   data() {
     return {
       shownItem: {},
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        580: {
+          slidesPerView: 2,
+        },
+        767: {
+          slidesPerView: 3,
+        },
+        990: {
+          slidesPerView: 4,
+        },
+      },
     };
   },
 };
@@ -216,6 +231,19 @@ export default {
   .swiper-pagination-bullet {
     width: 10px;
     height: 10px;
+  }
+}
+
+//Media Queries
+@media (max-width: 580px) {
+  .products-swiper {
+    .image-parent {
+      height: 300px !important;
+    }
+    .swiper-button-next,
+    .swiper-button-prev {
+      top: 50%;
+    }
   }
 }
 </style>

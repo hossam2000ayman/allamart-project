@@ -3,7 +3,7 @@
     <v-navigation-drawer
       temporary
       v-model="drawer"
-      width="370"
+      :width="windowWidth <= 767 ? windowWidth / 2 : 370"
       class="px-5 pt-0 cart-drawer"
     >
       <v-card class="px-0" elevation="0">
@@ -27,21 +27,25 @@
               })
             "
           >
-            <v-list-item-title>{{ category.title }}</v-list-item-title>
+            <v-list-item-title class="nav-link">
+              {{ category.title }}
+            </v-list-item-title>
           </v-list-item>
           <v-list-group>
             <template v-slot:activator="{ props }">
               <v-list-item v-bind="props" class="px-0">
-                <v-list-item-title>Languages</v-list-item-title>
+                <v-list-item-title class="nav-link">
+                  Languages
+                </v-list-item-title>
               </v-list-item>
             </template>
-            <v-list-item class="d-flex align-center" style="gap: 5px">
+            <v-list-item class="d-flex align-center nav-link" style="gap: 5px">
               <v-list-item-title>
                 <span v-html="this.$svg.en_lang" class="mr-2"></span>
                 English
               </v-list-item-title>
             </v-list-item>
-            <v-list-item class="d-flex align-center" style="gap: 5px">
+            <v-list-item class="d-flex align-center nav-link" style="gap: 5px">
               <v-list-item-title>
                 <span v-html="this.$svg.de_lang" class="mr-2"></span>
                 Deutech
@@ -60,6 +64,11 @@ import { mapState } from "pinia";
 
 export default {
   inject: ["emitter"],
+  props: {
+    windowWidth: {
+      type: Number,
+    },
+  },
   data() {
     return {
       drawer: false,
@@ -76,3 +85,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+//Media Queries
+@media (max-width: 580px) {
+  .nav-link {
+    font-size: 12px;
+  }
+}
+</style>

@@ -6,8 +6,11 @@
     <v-container fluid>
       <v-row>
         <v-col
-          cols="3"
-          class="px-1"
+          cols="12"
+          sm="6"
+          md="4"
+          lg="3"
+          class="px-1 mb-4 mb-lg-0"
           v-for="(reason, index) in reasons"
           :key="index"
         >
@@ -48,22 +51,26 @@ export default {
       reasons: [
         {
           answer: "Free Shipping On First Order",
-          description: "Lorem ipsum dolor sit amet",
+          description:
+            "Enjoy free shipping on your very first purchase! Shop now and save on delivery.",
           image: require("@/assets/images/free-shipping.png"),
         },
         {
           answer: "Weekly Flash Sale",
-          description: "Lorem ipsum dolor sit amet",
+          description:
+            "Catch unbeatable deals every week on popular products. Don’t miss out!",
           image: require("@/assets/images/weekly-flash-sales.png"),
         },
         {
           answer: "Annual Payment Discount",
-          description: "Lorem ipsum dolor sit amet",
+          description:
+            "Save more with our exclusive discount when you choose annual payment options.",
           image: require("@/assets/images/discount.png"),
         },
         {
           answer: "Cashback Reward Program",
-          description: "Lorem ipsum dolor sit amet",
+          description:
+            "Earn cashback on every purchase and watch your savings grow with every order.",
           image: require("@/assets/images/cash-back.png"),
         },
       ],

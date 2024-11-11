@@ -2,8 +2,8 @@
   <div class="layout">
     <!-- make layout component relative position to any sub component which position is absolute -->
     <v-layout class="position-relative">
-      <CartDrawer />
-      <MenuDrawer />
+      <CartDrawer :windowWidth="windowWidth" />
+      <MenuDrawer :windowWidth="windowWidth" />
       <AppNavbar
         v-show="$route.name !== 'checkout' && !showFixed && windowWidth > 990"
       />

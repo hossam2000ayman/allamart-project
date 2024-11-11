@@ -12,10 +12,13 @@
         </v-row>
         <v-row v-else>
           <v-col
-            cols="3"
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
             v-for="product in categoryProduct.products"
             :key="product.id"
-            class="px-5"
+            class="px-10 px-sm-5 mt-8 mt-lg-0"
           >
             <v-lazy>
               <v-card elevation="0" class="pb-5">

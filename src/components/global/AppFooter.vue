@@ -3,7 +3,14 @@
     <v-footer :app="true" color="grey-lighten-4" absolute class="pt-14">
       <v-container class="px-0" fluid>
         <v-row>
-          <v-col cols="3" v-for="(footer, i) in footers" :key="i">
+          <v-col
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
+            v-for="(footer, i) in footers"
+            :key="i"
+          >
             <v-card elevation="0" color="transparent">
               <v-card-title
                 class="px-0"
@@ -46,7 +53,7 @@
               </div>
             </v-card>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" sm="6" md="4" lg="3">
             <v-card elevation="0" color="transparent" class="pt-2">
               <img
                 src="@/assets/images/footer-logo.webp"
@@ -79,7 +86,7 @@
               </div>
             </div>
           </v-col>
-          <v-col cols="12">
+          <v-col cols="12" sm="6" md="4" lg="">
             <div class="img-parent text-center mt-11 mb-8">
               <img
                 src="https://new-ella-demo.myshopify.com/cdn/shop/files/trust_551fa8e0-5f24-4fbc-bf22-74c01b859a01.png?v=1639984732"
@@ -90,14 +97,17 @@
         </v-row>
 
         <v-row class="pt-7 bg-white">
-          <v-col cols="6">
+          <v-col cols="12" md="6" class="text-center">
             <p style="color: rgb(127, 127, 127); font-size: 14px">
               &copy; {{ new Date().getFullYear() }} AllaMart Demo. All Rights
               Reserved. Powered By Hossam
             </p>
           </v-col>
-          <v-col cols="6" class="text-end">
-            <div class="master-cards d-flex justify-end" style="gap: 10px">
+          <v-col cols="12" md="6" class="text-end">
+            <div
+              class="master-cards d-flex justify-center justify-md-end"
+              style="gap: 10px"
+            >
               <span
                 v-for="(payment, index) in payments"
                 :key="index"

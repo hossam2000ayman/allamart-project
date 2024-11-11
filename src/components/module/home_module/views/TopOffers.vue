@@ -3,8 +3,11 @@
     <v-container fluid class="pt-5">
       <v-row>
         <v-col
-          cols="4"
-          class="py-0 pr-4"
+          cols="12"
+          sm="6"
+          md="4"
+          lg="4"
+          class="py-0 px-3 pr-lg-6 mt-3 mt-lg-0 mt-sm-0"
           v-for="(offer, index) in offers"
           :key="index"
           style="height: 290px"
@@ -27,8 +30,9 @@
       </v-row>
       <v-row class="mt-9">
         <v-col
-          cols="6"
-          class="mt-3 py-0 pr-4"
+          cols="12"
+          sm="6"
+          class="mt-3 py-0 px-3 px-sm-5"
           v-for="(special, index) in specials"
           :key="index"
           style="height: 500px"

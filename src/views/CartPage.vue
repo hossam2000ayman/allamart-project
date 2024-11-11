@@ -137,7 +137,7 @@
             </v-btn>
           </v-card-actions>
         </v-col>
-        <v-col cols="8" class="px-3" v-if="cartItems.length">
+        <v-col cols="12" lg="8" class="px-3" v-if="cartItems.length">
           <v-table class="w-100">
             <thead>
               <tr>
@@ -275,7 +275,12 @@
             />
           </v-card-text>
         </v-col>
-        <v-col cols="4" class="px-3" v-if="cartItems.length">
+        <v-col
+          cols="12"
+          lg="4"
+          class="px-3 mt-8 mt-lg-0"
+          v-if="cartItems.length"
+        >
           <v-card elevation="0">
             <v-card-title style="font-size: 14px; font-weight: 900">
               ORDER SUMMARY
@@ -442,3 +447,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+//Media Queries
+@media (max-width: 767px) {
+  .cart-page {
+    table {
+      width: 800px !important;
+    }
+  }
+}
+</style>
