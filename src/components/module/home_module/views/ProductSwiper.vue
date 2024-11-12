@@ -163,7 +163,7 @@ export default {
   props: {
     products: {
       type: Array,
-      required: true,
+      default: () => [],
     },
     title: {
       type: String,

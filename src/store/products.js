@@ -37,92 +37,11 @@ export const ProductsModule = defineStore("ProductsModule", {
         url: "https://dummyjson.com/products/category/mens-watches",
       },
 
-      // {
-      //   route: "mens-shoes",
-      //   title: "Mens Shoes",
-      //   url: "https://dummyjson.com/products/category/mens-shoes",
-      // },
-      // {
-      //   route: "mens-shirts",
-      //   title: "Mens Shirts",
-      //   url: "https://dummyjson.com/products/category/mens-shirts",
-      // },
-      // {
-      //   route: "sunglasses",
-      //   title: "Sunglasses",
-      //   url: "https://dummyjson.com/products/category/sunglasses",
-      // },
-
       {
         route: "fragrances",
         title: "Fragrances",
         url: "https://dummyjson.com/products/category/fragrances",
       },
-      // {
-      //   route: "groceries",
-      //   title: "Groceries",
-      //   url: "https://dummyjson.com/products/category/groceries",
-      // },
-      // {
-      //   route: "home-decoration",
-      //   title: "Home Decoration",
-      //   url: "https://dummyjson.com/products/category/home-decoration",
-      // },
-      // {
-      //   route: "furniture",
-      //   title: "Furniture",
-      //   url: "https://dummyjson.com/products/category/furniture",
-      // },
-      // {
-      //   route: "kitchen-accessories",
-      //   title: "Kitchen Accessories",
-      //   url: "https://dummyjson.com/products/category/kitchen-accessories",
-      // },,
-      // {
-      //   route: "sports-accessories",
-      //   title: "Sports Accessories",
-      //   url: "https://dummyjson.com/products/category/sports-accessories",
-      // },
-      // {
-      //   route: "skin-care",
-      //   title: "Skin Care",
-      //   url: "https://dummyjson.com/products/category/skin-care",
-      // }
-      // {
-      //   route: "beauty",
-      //   title: "Beauty",
-      //   url: "https://dummyjson.com/products/category/beauty",
-      // },
-      // {
-      //   route: "tops",
-      //   title: "Tops",
-      //   url: "https://dummyjson.com/products/category/tops",
-      // },
-      // {
-      //   route: "womens-bags",
-      //   title: "Womens Bags",
-      //   url: "https://dummyjson.com/products/category/womens-bags",
-      // },
-      // {
-      //   route: "womens-dresses",
-      //   title: "Womens Dresses",
-      //   url: "https://dummyjson.com/products/category/womens-dresses",
-      // },
-      // {
-      //   route: "womens-jewellery",
-      //   title: "Womens Jewellery",
-      //   url: "https://dummyjson.com/products/category/womens-jewellery",
-      // },
-      // {
-      //   route: "womens-shoes",
-      //   title: "Womens Shoes",
-      //   url: "https://dummyjson.com/products/category/womens-shoes",
-      // },
-      // {
-      //   route: "womens-watches",
-      //   title: "Womens Watches",
-      //   url: "https://dummyjson.com/products/category/womens-watches",
-      // },
       {
         route: "motorcycle",
         title: "Motorcycle",
