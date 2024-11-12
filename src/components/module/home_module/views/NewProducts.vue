@@ -1,7 +1,7 @@
 <template>
   <div class="new-products pt-12">
     <div class="title mb-10 px-5 d-flex align-center justify-space-between">
-      <h2 style="font-weight: 900; font-size: 30px">New Foods</h2>
+      <h2 style="font-weight: 900; font-size: 30px">{{ title }}</h2>
       <!-- <a href="#" class="text-black" style="font-size: 14px">Shop All</a> -->
     </div>
     <v-container fluid>
@@ -166,6 +166,9 @@ export default {
     products: {
       type: Array,
       default: () => [],
+    },
+    title: {
+      type: String,
     },
   },
   setup() {

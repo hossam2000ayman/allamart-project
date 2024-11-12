@@ -3,11 +3,11 @@ import { defineStore } from "pinia";
 export const ProductsModule = defineStore("ProductsModule", {
   //in pinia state act as state + getters
   state: () => ({
-    flashDeals: [],
-    newFoods: [],
-    newBeauties: [],
-    newFurnitures: [],
-    newFragrances: [],
+    newLaptops: [],
+    newSmartphones: [],
+    newTablets: [],
+    newMotorcycles: [],
+    newMobileAccessories: [],
     categoryProduct: [],
     singleProduct: "",
     categories: [
@@ -36,12 +36,6 @@ export const ProductsModule = defineStore("ProductsModule", {
         title: "Mens Watches",
         url: "https://dummyjson.com/products/category/mens-watches",
       },
-
-      {
-        route: "fragrances",
-        title: "Fragrances",
-        url: "https://dummyjson.com/products/category/fragrances",
-      },
       {
         route: "motorcycle",
         title: "Motorcycle",
@@ -57,30 +51,50 @@ export const ProductsModule = defineStore("ProductsModule", {
   //in pinia actions act as mutations + actions
   actions: {
     async getProducts() {
-      await axios
-        .get("https://dummyjson.com/products")
-        .then((response) => {
-          this.flashDeals = response.data.products.slice(0, 30); //get first 8 product from this array
-          this.newFoods = response.data.products.filter(
-            (food) => food.category === "groceries"
-          );
-          this.newBeauties = response.data.products.filter(
-            (beauty) => beauty.category === "beauty"
-          );
-          this.newFurnitures = response.data.products.filter(
-            (furniture) => furniture.category === "furniture"
-          );
-          this.newFragrances = response.data.products.filter(
-            (frangrance) => frangrance.category === "fragrances"
-          );
-        })
-        .catch((error) => console.log(error));
+      this.newLaptops = await this.getProductsByCategory("laptops").then(
+        (response) => {
+          return response;
+        }
+      );
+      this.newTablets = await this.getProductsByCategory("tablets").then(
+        (response) => {
+          return response;
+        }
+      );
+      this.newSmartphones = await this.getProductsByCategory(
+        "smartphones"
+      ).then((response) => {
+        return response;
+      });
+      this.newMotorcycles = await this.getProductsByCategory("motorcycle").then(
+        (response) => {
+          return response;
+        }
+      );
+
+      this.newMobileAccessories = await this.getProductsByCategory(
+        "mobile-accessories"
+      ).then((response) => {
+        return response;
+      });
     },
-    async getProductsByCategory(category) {
+    async openProductsByCategory(category) {
       await axios
         .get(`https://dummyjson.com/products/category/${category}`)
         .then((response) => {
           this.categoryProduct = response.data;
+        });
+    },
+    async getProductsByCategory(category) {
+      //make this method return promise to be able to pass the data to other variables like (states)
+      return axios
+        .get(`https://dummyjson.com/products/category/${category}`)
+        .then((response) => {
+          return response.data.products;
+        })
+        .catch((error) => {
+          console.log(error);
+          return [];
         });
     },
     async getSingleProductById(id) {

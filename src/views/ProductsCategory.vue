@@ -158,7 +158,7 @@ export default {
     ...mapState(ProductsModule, ["categoryProduct"]),
   },
   methods: {
-    ...mapActions(ProductsModule, ["getProductsByCategory"]),
+    ...mapActions(ProductsModule, ["openProductsByCategory"]),
     openQuickView(product) {
       this.emitter.emit("openQuickView", product);
     },
@@ -172,7 +172,7 @@ export default {
       if (this.$route.name === "products-category") {
         document.documentElement.scrollTo(0, 0);
         this.loading = true;
-        await this.getProductsByCategory(this.$route.query.category);
+        await this.openProductsByCategory(this.$route.query.category);
         this.loading = false;
         console.log("fired");
       }
@@ -184,7 +184,7 @@ export default {
       return this.$router.go(-1);
     }
     this.loading = true;
-    await this.getProductsByCategory(this.$route.query.category);
+    await this.openProductsByCategory(this.$route.query.category);
     this.loading = false;
   },
 };

@@ -2,11 +2,18 @@
   <UpperBanner />
   <TheFeatures />
   <TopOffers />
-  <ProductsComponent title="Flash Deals" color="error" :products="flashDeals" />
+  <ProductsComponent
+    title="Smart Phones"
+    color="error"
+    :products="newSmartphones"
+  />
   <TopCategories />
-  <NewProducts :products="newFoods" />
+  <NewProducts
+    title="New Mobile Accessories"
+    :products="newMobileAccessories"
+  />
   <QualityFeatures />
-  <ProductsComponent title="Top Furnitures" :products="newFurnitures" />
+  <ProductsComponent title="Top Tablets" :products="newTablets" />
   <v-container fluid>
     <v-row>
       <v-col cols="6" class="pr-5">
@@ -18,15 +25,15 @@
     </v-row>
   </v-container>
   <ProductsComponent
-    title="Top Frangrances"
+    title="Top Motorcycles"
     color="blue"
-    :products="newFragrances"
+    :products="newMotorcycles"
   />
   <img src="@/assets/images/tv-banner.webp" alt="" class="w-100" />
   <ProductsComponent
-    title="Top Frangrances"
+    title="Top Laptops"
     color="purple"
-    :products="newFragrances"
+    :products="newLaptops"
   />
 
   <WhyShopWithUs />
@@ -45,10 +52,10 @@ import WhyShopWithUs from "@/components/module/home_module/views/WhyShopWithUs.v
 export default {
   data() {
     return {
-      newLaptops: [],
-      newSmartphones: [],
-      newTablets: [],
-      newMotorcycles: [],
+      // newLaptops: [],
+      // newTablets: [],
+      // newSmartphones: [],
+      // newMotorcycles: [],
     };
   },
   components: {
@@ -63,22 +70,18 @@ export default {
   },
   computed: {
     ...mapState(ProductsModule, [
-      "flashDeals",
-      "newFoods",
-      "newBeauties",
-      "newFurnitures",
-      "newFragrances",
+      "newLaptops",
+      "newSmartphones",
+      "newTablets",
+      "newMotorcycles",
+      "newMobileAccessories",
     ]),
   },
   methods: {
-    ...mapActions(ProductsModule, ["getProducts", "getProductsByCategory"]),
+    ...mapActions(ProductsModule, ["getProducts"]),
   },
   async mounted() {
-    await this.getProducts();
-    this.newLaptops = await this.getProductsByCategory("laptops");
-    this.newTablets = await this.getProductsByCategory("tablets");
-    this.newSmartphones = await this.getProductsByCategory("smartphones");
-    this.newMotorcycles = await this.getProductsByCategory("motorcycle");
+    this.getProducts();
   },
 };
 </script>
